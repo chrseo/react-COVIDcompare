@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import DisplayCountry from "./DisplayCountry";
+import GlobalCases from "./GlobalCases";
 
 class Info extends Component {
   constructor() {
     super();
     this.state = {
       countryCases: 0,
-      globalCases: "Loading...",
+      globalCases: null,
       countryName: "",
       countrySubmitted: "",
       countries: {},
@@ -55,16 +56,19 @@ class Info extends Component {
       let entry = this.state.countries[i];
       let countryName = entry.country;
       if (countryEntered === countryName) {
+        // global cases
         if (countryEntered === "World") {
           let cases = entry.cases;
           this.setState({ globalCases: cases });
           break;
         }
         let cases = entry.cases;
-        this.setState({ countryCases: cases });
-        this.setState({ displayCountry: true });
-        this.setState({ countrySubmitted: countryName });
-        this.setState({ wrongCountry: false });
+        this.setState({
+          countryCases: cases,
+          displayCountry: true,
+          countrySubmitted: countryName,
+          wrongCountry: false,
+        });
         break;
       } else {
         this.setState({ wrongCountry: true });
@@ -72,12 +76,12 @@ class Info extends Component {
     }
   }
 
+  //<h2>Global Cases: {this.state.globalCases.toLocaleString()}</h2>
+
   render() {
     return (
       <div>
-        <h2>Global Cases: {this.state.globalCases.toLocaleString()}</h2>
-
-        <br />
+        <GlobalCases cases={this.state.globalCases} />
 
         <input
           type="text"
@@ -107,10 +111,10 @@ class Info extends Component {
         )}
 
         {this.state.wrongCountry && (
-          <h2>
+          <h3>
             There is no country with that name or there is no data on that
             country!
-          </h2>
+          </h3>
         )}
       </div>
     );

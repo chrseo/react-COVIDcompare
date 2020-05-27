@@ -32,6 +32,25 @@ class Info extends Component {
   }
 
   searchCountry(countryEntered) {
+    //handles different capitalization in entries
+    countryEntered = countryEntered
+      .toLowerCase()
+      .split(" ")
+      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(" ");
+    //handles different cases for USA
+    if (
+      countryEntered === "United States" ||
+      countryEntered === "Us" ||
+      countryEntered === "Usa"
+    ) {
+      countryEntered = "USA";
+    }
+
+    //handles different cases for South Korea
+    if (countryEntered === "South Korea") {
+      countryEntered = "S. Korea";
+    }
     for (let i = 0; i < this.state.countries.length; i++) {
       let entry = this.state.countries[i];
       let countryName = entry.country;
@@ -56,7 +75,7 @@ class Info extends Component {
   render() {
     return (
       <div>
-        <h2>Global Cases: {this.state.globalCases}</h2>
+        <h2>Global Cases: {this.state.globalCases.toLocaleString()}</h2>
 
         <br />
 
@@ -88,7 +107,10 @@ class Info extends Component {
         )}
 
         {this.state.wrongCountry && (
-          <h2>There is no country with that name!</h2>
+          <h2>
+            There is no country with that name or there is no data on that
+            country!
+          </h2>
         )}
       </div>
     );

@@ -1,10 +1,14 @@
 import React from "react";
+import Typist from "react-typist";
 
 function Header() {
   return (
     <div>
       <header className="header">
-        <h1>COVID-19: How does your country compare?</h1>
+        <h1>COVID-19</h1>
+        <Typist cursor={{ show: false }}>
+          <h2>How does your country compare?</h2>
+        </Typist>
       </header>
     </div>
   );

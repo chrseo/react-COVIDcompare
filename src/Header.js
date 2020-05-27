@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <div>
-      <header>
+      <header className="header">
         <h1>COVID-19: How does your country compare?</h1>
       </header>
     </div>

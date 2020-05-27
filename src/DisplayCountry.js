@@ -7,7 +7,7 @@ function DisplayCountry(props) {
       <h1>{props.country}</h1>
       <p>
         There are {props.numCases.toLocaleString()} cases in your country.
-        That's {percent}% of the cases on Earth!
+        That's {percent}% of the cases in the world!
       </p>
     </div>
   );

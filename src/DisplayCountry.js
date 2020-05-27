@@ -1,14 +1,13 @@
 import React from "react";
 
 function DisplayCountry(props) {
-  let percent = Math.floor((props.numCases / props.globalNum) * 100);
-  console.log(percent);
+  let percent = ((props.numCases / props.globalNum) * 100).toFixed(2);
   return (
     <div>
       <h1>{props.country}</h1>
       <p>
-        There are {props.numCases} in your country. That's {percent}% of the
-        cases on Earth!
+        There are {props.numCases.toLocaleString()} cases in your country.
+        That's {percent}% of the cases on Earth!
       </p>
     </div>
   );

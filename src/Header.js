@@ -3,8 +3,8 @@ import Typist from "react-typist";
 
 function Header() {
   return (
-    <div>
-      <header className="header">
+    <div className="header">
+      <header>
         <h1>COVID-19</h1>
         <Typist cursor={{ show: false }}>
           <h2>How does your country compare?</h2>

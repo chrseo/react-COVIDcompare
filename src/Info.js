@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DisplayCountry from "./DisplayCountry";
 import GlobalCases from "./GlobalCases";
+import styles from "./style.css";
 
 class Info extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class Info extends Component {
       countryName: "",
       countrySubmitted: "",
       countries: {},
+      countryFlags: {},
       displayCountry: false,
       wrongCountry: false,
     };
@@ -23,40 +25,62 @@ class Info extends Component {
       .then((response) => response.json())
       .then((data) => this.setState({ countries: data }))
       .then(() => this.searchCountry("World"));
+    fetch(
+      "https://emoji-api.com/categories/flags?access_key=cb966f1d846d4a6c32bfb8363962b07dada1668b"
+    )
+      .then((response) => response.json())
+      .then((data) => this.setState({ countryFlags: data }));
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
-    name === "input"
-      ? this.setState({ countryName: value })
-      : this.searchCountry(value);
+    const { value } = event.target;
+    this.setState({ countryName: value });
   }
 
-  searchCountry(countryEntered) {
+  submitChange(e) {
+    if (e.key === "Enter") {
+      this.searchCountry(this.state.countryName);
+    }
+  }
+
+  toValidCountry(countryEntered) {
     //handles different capitalization in entries
     countryEntered = countryEntered
       .toLowerCase()
       .split(" ")
       .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      .join(" ");
+      .join(" ")
+      .trim();
+
     //handles different cases for USA
-    if (
-      countryEntered === "United States" ||
-      countryEntered === "Us" ||
-      countryEntered === "Usa"
-    ) {
-      countryEntered = "USA";
+    const USAinput = ["United States", "Us", "Usa"];
+    if (USAinput.includes(countryEntered)) {
+      return "USA";
+    }
+
+    //handles different cases for UK
+    const UKinput = ["United Kingdom", "Uk", "England"];
+    if (UKinput.includes(countryEntered)) {
+      return "UK";
     }
 
     //handles different cases for South Korea
     if (countryEntered === "South Korea") {
-      countryEntered = "S. Korea";
+      return "S. Korea";
     }
-    for (let i = 0; i < this.state.countries.length; i++) {
-      let entry = this.state.countries[i];
+
+    return countryEntered;
+  }
+
+  searchCountry(countryEntered) {
+    countryEntered = this.toValidCountry(countryEntered);
+    if (countryEntered === "") {
+      return;
+    }
+    for (const entry of this.state.countries) {
       let countryName = entry.country;
       if (countryEntered === countryName) {
-        // global cases
+        // set global cases initially
         if (countryEntered === "World") {
           let cases = entry.cases;
           this.setState({ globalCases: cases });
@@ -76,46 +100,39 @@ class Info extends Component {
     }
   }
 
-  //<h2>Global Cases: {this.state.globalCases.toLocaleString()}</h2>
-
   render() {
     return (
       <div>
-        <GlobalCases cases={this.state.globalCases} />
+        <GlobalCases className="GlobalCases" cases={this.state.globalCases} />
 
-        <input
-          type="text"
-          placeholder="Enter country name"
-          name="input"
-          onChange={this.handleChange}
-          value={this.state.countryName}
-        />
-
-        <button
-          type="text"
-          onClick={this.handleChange}
-          name="button"
-          value={this.state.countryName}
-        >
-          Go!
-        </button>
-
-        <br />
+        <div className="searchbar">
+          <input
+            type="text"
+            placeholder="Search by country"
+            name="input"
+            onKeyUp={this.submitChange.bind(this)}
+            onChange={this.handleChange}
+            value={this.state.countryName}
+          />
+        </div>
 
         {this.state.displayCountry && !this.state.wrongCountry && (
           <DisplayCountry
+            className="DisplayCountry"
             country={this.state.countrySubmitted}
             numCases={this.state.countryCases}
             globalNum={this.state.globalCases}
+            countryFlags={this.state.countryFlags}
           />
         )}
 
         {this.state.wrongCountry && (
-          <h3>
-            There is no country with that name or there is no data on that
-            country!
-          </h3>
+          <div className="wrongCountry">
+            <h3>Country has no data or no country with that name!</h3>
+          </div>
         )}
+
+        <p>Created by Chris Seo in quarantine</p>
       </div>
     );
   }

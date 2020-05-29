@@ -1,20 +1,20 @@
 import React, { Component } from "react";
-import DisplayCountry from "./DisplayCountry.js";
 import CountryCard from "./CountryCard.js";
 import IncorrectMessage from "./IncorrectMessage.js";
-import BrowserRouter, { Redirect } from "react-router-dom";
-import styles from "./style.css";
+import Searchbar from "./Searchbar.js";
+import { Redirect } from "react-router-dom";
+import "./style.css";
 
 class HomeBody extends Component {
   constructor() {
     super();
     this.state = {
-      countryCases: 0,
+      isLoading: true,
+      worldData: null,
+      countryData: null,
       allCountryData: null,
       globalCases: null,
       countryName: "",
-      countrySubmitted: "",
-      countries: {},
       countryFlags: {},
       displayCountry: false,
       wrongCountry: false,
@@ -27,9 +27,10 @@ class HomeBody extends Component {
   componentDidMount() {
     fetch("https://coronavirus-19-api.herokuapp.com/countries")
       .then((response) => response.json())
-      .then((data) => this.setState({ allCountryData: data }));
+      .then((data) => this.setState({ allCountryData: data }))
+      .then(() => this.setState({ worldData: this.getWorldData() }))
+      .then(() => this.setState({ isLoading: false }));
 
-    console.log(this.state.allCountryData);
     fetch(
       "https://emoji-api.com/categories/flags?access_key=cb966f1d846d4a6c32bfb8363962b07dada1668b"
     )
@@ -48,7 +49,7 @@ class HomeBody extends Component {
     }
   }
 
-  toValidCountry(countryEntered) {
+  static toValidCountry(countryEntered) {
     //handles different capitalization in entries
     countryEntered = countryEntered
       .toLowerCase()
@@ -74,7 +75,7 @@ class HomeBody extends Component {
   }
 
   searchCountry(countryEntered) {
-    countryEntered = this.toValidCountry(countryEntered);
+    countryEntered = HomeBody.toValidCountry(countryEntered);
     if (countryEntered === "") {
       return;
     }
@@ -95,45 +96,48 @@ class HomeBody extends Component {
   }
 
   getWorldData() {
-    if (this.state.allCountryData) {
-      for (const countryData of this.state.allCountryData) {
-        let countryName = countryData.country;
-        if (countryName === "World") {
-          return countryData;
-        }
+    let worldTotalTests = 0;
+    let worldData;
+    for (const countryData of this.state.allCountryData) {
+      let countryName = countryData.country;
+      if (countryName === "World") {
+        worldData = countryData;
       }
+      worldTotalTests += countryData.totalTests;
     }
-    return null;
+    worldData.totalTests = worldTotalTests;
+    return worldData;
   }
 
   render() {
     return (
       <div>
         <CountryCard
+          isLoading={this.state.isLoading}
           country="World"
+          countryData={this.state.worldData}
           countryFlags={this.state.countryFlags}
-          countryData={this.getWorldData()}
         />
 
-        <div className="searchbar">
-          <input
-            type="text"
-            placeholder="Search by country"
-            name="input"
-            onKeyUp={this.submitChange}
-            onChange={this.handleChange}
-            value={this.state.countryName}
-          />
-        </div>
+        <Searchbar
+          placeholderText="Search by country"
+          submitChange={this.submitChange}
+          handleChange={this.handleChange}
+          countryName={this.state.countryName}
+        />
 
-        {this.state.displayCountry && !this.state.wrongCountry && (
+        {this.state.displayCountry && (
           <Redirect
             to={{
               pathname: `/${this.state.countryName}`,
               state: {
+                countryName: this.state.countryName,
+                displayCountry: false,
+                wrongCountry: false,
+                allCountryData: this.state.allCountryData,
                 countryData: this.state.countryData,
                 countryFlags: this.state.countryFlags,
-                worldData: this.getWorldData(),
+                worldData: this.state.worldData,
               },
             }}
           />

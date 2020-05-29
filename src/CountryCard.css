@@ -1,0 +1,98 @@
+.CountryCard {
+  width: 497px;
+  height: 335px;
+  padding-left: 35px;
+
+  background: #ffffff;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.15);
+
+  font-family: Roboto;
+  font-style: normal;
+  color: #3e3e3e;
+}
+
+.cardHeader {
+  height: 120px;
+  font-weight: bold;
+  font-size: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.largeStats {
+  width: 407px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.largeDivider {
+  position: absolute;
+  width: 56px;
+  height: 0px;
+  left: 163px;
+  top: 175px;
+
+  border: 1px solid #e1e1e1;
+  transform: rotate(90deg);
+}
+
+.cases {
+  position: absolute;
+  left: 43px;
+}
+
+.deaths {
+  position: absolute;
+  left: 202px;
+}
+
+.recovered {
+  position: absolute;
+  left: 340px;
+}
+
+.headerNames {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 5px;
+
+  color: #a2a2a2;
+}
+
+.headerNumbers {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 13px;
+}
+
+.smallStats {
+  margin-top: 20px;
+}
+
+.smallStatsLeft {
+  display: inline-block;
+  width: 230px;
+}
+
+.smallStatsRight {
+  display: inline-block;
+}
+
+.divider {
+  display: inline;
+  color: #e1e1e1;
+}
+
+.smallInfoPiece {
+  font-size: 14px;
+}
+
+.smallInfoName {
+  display: inline;
+  color: #a1a1a1;
+}
+.smallInfoNumber {
+  display: inline;
+  font-weight: bold;
+}

@@ -60,168 +60,152 @@ class CountryCard extends Component {
         </div>
         <div className="largeStats">
           <div className="cases">
-            <p>
-              <p className="headerNames">Cases</p>
-              <p className="headerNumbers">
-                {this.state.isLoading ? (
-                  "—"
-                ) : (
-                  <CountUp
-                    end={this.props.countryData.cases}
-                    separator=","
-                    duration={1}
-                  />
-                )}
-              </p>
+            <p className="headerNames">Cases</p>
+            <p className="headerNumbers">
+              {this.state.isLoading ? (
+                "—"
+              ) : (
+                <CountUp
+                  end={this.props.countryData.cases}
+                  separator=","
+                  duration={1}
+                />
+              )}
             </p>
           </div>
 
-          <span class="largeDivider"></span>
+          <span className="largeDivider"></span>
 
           <div className="deaths">
-            <p>
-              <p className="headerNames">Deaths</p>
-              <p className="headerNumbers">
-                {this.state.isLoading ? (
-                  "—"
-                ) : (
-                  <CountUp
-                    end={this.props.countryData.deaths}
-                    separator=","
-                    duration={1}
-                  />
-                )}
-              </p>
+            <p className="headerNames">Deaths</p>
+            <p className="headerNumbers">
+              {this.state.isLoading ? (
+                "—"
+              ) : (
+                <CountUp
+                  end={this.props.countryData.deaths}
+                  separator=","
+                  duration={1}
+                />
+              )}
             </p>
           </div>
 
+          <span className="largeDivider"></span>
+
           <div className="recovered">
-            <p>
-              <p className="headerNames">Recovered</p>
-              <p className="headerNumbers">
-                {this.state.isLoading ? (
-                  "—"
-                ) : (
-                  <CountUp
-                    end={this.props.countryData.recovered}
-                    separator=","
-                    duration={1}
-                  />
-                )}
-              </p>
+            <p className="headerNames">Recovered</p>
+            <p className="headerNumbers">
+              {this.state.isLoading ? (
+                "—"
+              ) : (
+                <CountUp
+                  end={this.props.countryData.recovered}
+                  separator=","
+                  duration={1}
+                />
+              )}
             </p>
           </div>
         </div>
         <div className="smallStats">
           <div className="smallStatsLeft">
             <div className="smallInfoPiece">
-              <p>
-                <p className="smallInfoName">Cases per Million</p>{" "}
-                <p className="divider">|</p>{" "}
-                <p className="smallInfoNumber">
-                  {this.state.isLoading ? (
-                    "—"
-                  ) : (
-                    <CountUp
-                      className="smallInfoNumber"
-                      end={this.props.countryData.casesPerOneMillion}
-                      separator=","
-                      duration={1}
-                    />
-                  )}
-                </p>
+              <p className="smallInfoName">Cases per Million</p>{" "}
+              <p className="divider">|</p>{" "}
+              <p className="smallInfoNumber">
+                {this.state.isLoading ? (
+                  "—"
+                ) : (
+                  <CountUp
+                    className="smallInfoNumber"
+                    end={this.props.countryData.casesPerOneMillion}
+                    separator=","
+                    duration={1}
+                  />
+                )}
               </p>
             </div>
             <div className="smallInfoPiece">
-              <p>
-                <p className="smallInfoName">Cases Today</p>{" "}
-                <p className="divider">|</p>{" "}
-                <p className="smallInfoNumber">
-                  {this.state.isLoading ? (
-                    "—"
-                  ) : (
-                    <CountUp
-                      className="smallInfoNumber"
-                      end={this.props.countryData.todayCases}
-                      separator=","
-                      duration={1}
-                    />
-                  )}
-                </p>
+              <p className="smallInfoName">Cases Today</p>{" "}
+              <p className="divider">|</p>{" "}
+              <p className="smallInfoNumber">
+                {this.state.isLoading ? (
+                  "—"
+                ) : (
+                  <CountUp
+                    className="smallInfoNumber"
+                    end={this.props.countryData.todayCases}
+                    separator=","
+                    duration={1}
+                  />
+                )}
               </p>
             </div>
             <div className="smallInfoPiece">
-              <p>
-                <p className="smallInfoName">Deaths per Million</p>{" "}
-                <p className="divider">|</p>{" "}
-                <p className="smallInfoNumber">
-                  {this.state.isLoading ? (
-                    "—"
-                  ) : (
-                    <CountUp
-                      className="smallInfoNumber"
-                      end={this.props.countryData.deathsPerOneMillion}
-                      separator=","
-                      duration={1}
-                    />
-                  )}
-                </p>
+              <p className="smallInfoName">Deaths per Million</p>{" "}
+              <p className="divider">|</p>{" "}
+              <p className="smallInfoNumber">
+                {this.state.isLoading ? (
+                  "—"
+                ) : (
+                  <CountUp
+                    className="smallInfoNumber"
+                    end={this.props.countryData.deathsPerOneMillion}
+                    separator=","
+                    duration={1}
+                  />
+                )}
               </p>
             </div>
           </div>
           <div className="smallStatsRight">
             <div className="smallInfoPiece">
-              <p>
-                <p className="smallInfoName">Tests</p>{" "}
-                <p className="divider">|</p>{" "}
-                <p className="smallInfoNumber">
-                  {this.state.isLoading ? (
-                    "—"
-                  ) : (
-                    <CountUp
-                      className="smallInfoNumber"
-                      end={this.props.countryData.totalTests}
-                      separator=","
-                      duration={1}
-                    />
-                  )}
-                </p>
+              <p className="smallInfoName">Tests</p>{" "}
+              <p className="divider">|</p>{" "}
+              <p className="smallInfoNumber">
+                {this.state.isLoading ? (
+                  "—"
+                ) : (
+                  <CountUp
+                    className="smallInfoNumber"
+                    end={this.props.countryData.totalTests}
+                    separator=","
+                    duration={1}
+                  />
+                )}
               </p>
             </div>
             <div className="smallInfoPiece">
-              <p>
-                <p className="smallInfoName">Active</p>{" "}
-                <p className="divider">|</p>{" "}
-                <p className="smallInfoNumber">
-                  {this.state.isLoading ? (
-                    "—"
-                  ) : (
-                    <CountUp
-                      className="smallInfoNumber"
-                      end={this.props.countryData.active}
-                      separator=","
-                      duration={1}
-                    />
-                  )}
-                </p>
+              <p className="smallInfoName">Active</p>{" "}
+              <p className="divider">|</p>{" "}
+              <p className="smallInfoNumber">
+                {this.state.isLoading ? (
+                  "—"
+                ) : (
+                  <CountUp
+                    className="smallInfoNumber"
+                    end={this.props.countryData.active}
+                    separator=","
+                    duration={1}
+                  />
+                )}
               </p>
             </div>
             <div className="smallInfoPiece">
-              <p>
-                <p className="smallInfoName">Critical</p>{" "}
-                <p className="divider">|</p>{" "}
-                <p className="smallInfoNumber">
-                  {this.state.isLoading ? (
-                    "—"
-                  ) : (
-                    <CountUp
-                      className="smallInfoNumber"
-                      end={this.props.countryData.critical}
-                      separator=","
-                      duration={1}
-                    />
-                  )}
-                </p>
+              <p className="smallInfoName">Critical</p>{" "}
+              <p className="divider">|</p>{" "}
+              <p className="smallInfoNumber">
+                {this.state.isLoading ? (
+                  "—"
+                ) : (
+                  <CountUp
+                    className="smallInfoNumber"
+                    end={this.props.countryData.critical}
+                    separator=","
+                    duration={1}
+                  />
+                )}
               </p>
             </div>
           </div>

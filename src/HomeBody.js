@@ -57,6 +57,10 @@ class HomeBody extends Component {
       .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
       .join(" ")
       .trim();
+    //rejects a "world" entry
+    if (countryEntered === "World") {
+      return "notCountry";
+    }
     //handles different cases for USA
     const USAinput = ["United States", "Us", "Usa"];
     if (USAinput.includes(countryEntered)) {
@@ -93,6 +97,13 @@ class HomeBody extends Component {
     this.setState({
       wrongCountry: true,
     });
+
+    //to rerender error message if re-entered a wrong country
+    setTimeout(() => {
+      this.setState({
+        wrongCountry: false,
+      });
+    }, 1300);
   }
 
   getWorldData() {
@@ -112,18 +123,20 @@ class HomeBody extends Component {
   render() {
     return (
       <div>
-        <CountryCard
-          isLoading={this.state.isLoading}
-          country="World"
-          countryData={this.state.worldData}
-          countryFlags={this.state.countryFlags}
-        />
-
         <Searchbar
           placeholderText="Search by country"
           submitChange={this.submitChange}
           handleChange={this.handleChange}
           countryName={this.state.countryName}
+        />
+
+        {this.state.wrongCountry && <IncorrectMessage />}
+
+        <CountryCard
+          isLoading={this.state.isLoading}
+          country="World"
+          countryData={this.state.worldData}
+          countryFlags={this.state.countryFlags}
         />
 
         {this.state.displayCountry && (
@@ -142,10 +155,6 @@ class HomeBody extends Component {
             }}
           />
         )}
-
-        {this.state.wrongCountry && <IncorrectMessage />}
-
-        <p>Created by Chris Seo in quarantine</p>
       </div>
     );
   }

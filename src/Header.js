@@ -1,15 +1,14 @@
 import React from "react";
 import Typist from "react-typist";
-import "./style.css";
+import "./Header.css";
 
 function Header() {
-  // you can reference header with "header" in css file
   return (
-    <div>
+    <div className="headerBlock">
       <header>
-        <h1>COVID-19</h1>
+        <h1 className="header">COVID-19</h1>
         <Typist cursor={{ show: false }}>
-          <h2>How does your country compare?</h2>
+          <h2 className="subHeader">How does your country compare?</h2>
         </Typist>
       </header>
     </div>

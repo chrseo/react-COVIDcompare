@@ -1,0 +1,20 @@
+.headerBlock {
+  margin-bottom: 9vh;
+}
+
+.header {
+  width: 1000px;
+  margin-top: 0px;
+  margin-bottom: 2vh;
+  font-weight: 900;
+  font-size: 85px;
+  line-height: 50px;
+}
+
+.subHeader {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: 500;
+  font-size: 55px;
+  color: #a1a1a1;
+}

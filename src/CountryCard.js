@@ -143,7 +143,7 @@ class CountryCard extends Component {
               </p>
             </div>
             <div className="smallInfoPiece">
-              <p className="smallInfoName">Deaths per Million</p>{" "}
+              <p className="smallInfoName">Deaths Today</p>{" "}
               <p className="divider">|</p>{" "}
               <p className="smallInfoNumber">
                 {this.state.isLoading ? (
@@ -151,7 +151,7 @@ class CountryCard extends Component {
                 ) : (
                   <CountUp
                     className="smallInfoNumber"
-                    end={this.props.countryData.deathsPerOneMillion}
+                    end={this.props.countryData.todayDeaths}
                     separator=","
                     duration={1}
                   />

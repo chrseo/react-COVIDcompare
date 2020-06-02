@@ -1,0 +1,25 @@
+.notFooter {
+  z-index: 1;
+  background-color: rgba(250, 250, 250, 1);
+}
+
+.gradient {
+  position: relative;
+  height: 100px;
+  background: linear-gradient(
+    rgba(250, 250, 250, 1) 0%,
+    rgba(250, 250, 250, 1) 25%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  z-index: -1;
+}
+
+.footerBar {
+  position: fixed;
+  bottom: 6vh;
+  font-weight: 400;
+  font-size: 15px;
+  color: #cccccc;
+  z-index: -2;
+  opacity: 1;
+}

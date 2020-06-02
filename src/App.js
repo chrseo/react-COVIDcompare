@@ -1,13 +1,16 @@
 import React from "react";
-import Header from "./Header";
-import Info from "./Info";
+import InfoPage from "./InfoPage.js";
+import Home from "./Home.js";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Info />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/:countryName" component={InfoPage} />
+      </Switch>
+    </Router>
   );
 }
 

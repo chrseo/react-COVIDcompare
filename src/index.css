@@ -1,5 +1,9 @@
 body {
+  margin-left: 6vw;
+  margin-right: 6vw;
+  margin-top: 9vh;
   font-family: Roboto;
   font-style: normal;
   color: #3e3e3e;
+  background-color: #fafafa;
 }

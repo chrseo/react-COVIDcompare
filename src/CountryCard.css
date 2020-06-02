@@ -12,7 +12,7 @@
 }
 
 .cardHeader {
-  height: 120px;
+  height: 130px;
   font-weight: bold;
   font-size: 48px;
   display: flex;
@@ -20,36 +20,26 @@
 }
 
 .largeStats {
-  width: 407px;
   height: 56px;
   display: flex;
   align-items: center;
 }
 
 .largeDivider {
-  position: absolute;
+  position: relative;
+  margin-right: 2px;
   width: 56px;
   height: 0px;
-  left: 163px;
-  top: 175px;
+  top: -3px;
+  left: 20px;
 
-  border: 1px solid #e1e1e1;
+  border: 1px solid #f0f0f0;
   transform: rotate(90deg);
 }
 
 .cases {
-  position: absolute;
-  left: 43px;
-}
-
-.deaths {
-  position: absolute;
-  left: 202px;
-}
-
-.recovered {
-  position: absolute;
-  left: 340px;
+  position: relative;
+  left: 0px;
 }
 
 .headerNames {
@@ -86,6 +76,7 @@
 
 .smallInfoPiece {
   font-size: 14px;
+  margin-bottom: 14px;
 }
 
 .smallInfoName {

@@ -1,7 +1,47 @@
 .leftSide {
-  margin-left: 6vw;
+  width: 44vw;
+  float: left;
+}
+
+.topCard {
+  width: 532px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3.5vh;
+}
+
+.bottomCard {
+  width: 532px;
+  margin: auto;
 }
 
 .rightSide {
-  display: inline-block;
+  width: 44vw;
+  float: right;
+}
+
+.infoPageSearch {
+  width: 532px;
+  margin: auto;
+  margin-bottom: 5vh;
+}
+
+.errorMessage {
+  position: relative;
+  top: 10px;
+  width: 237px;
+  margin: auto;
+}
+
+@media (max-width: 1260px) {
+  .rightSide {
+    float: none;
+    width: 532px;
+    margin: auto;
+  }
+  .leftSide {
+    float: none;
+    width: 532px;
+    margin: auto;
+  }
 }

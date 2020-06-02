@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import MaterialIcon from "material-icons-react";
+import "./Searchbar.css";
 
 class Searchbar extends Component {
   constructor(props) {
@@ -7,6 +9,7 @@ class Searchbar extends Component {
       placeholderText: this.props.placeholderText,
       submitChange: this.props.submitChange,
       handleChange: this.props.handleChange,
+      handleClick: this.props.handleClick,
       countryName: this.props.countryName,
     };
   }
@@ -19,14 +22,22 @@ class Searchbar extends Component {
 
   render() {
     return (
-      <div className="Searchbar">
+      <div className="componentSearchbar">
         <input
+          className="searchbarStyle"
           type="text"
           placeholder={this.state.placeholderText}
           onKeyUp={this.state.submitChange}
           onChange={this.state.handleChange}
           value={this.state.countryName}
         />
+        <button
+          className="searchButton"
+          onClick={this.state.handleClick}
+          name="button"
+        >
+          <MaterialIcon icon="search" size={27} color="#E3E3E3" />
+        </button>
       </div>
     );
   }

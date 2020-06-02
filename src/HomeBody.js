@@ -3,7 +3,6 @@ import CountryCard from "./CountryCard.js";
 import IncorrectMessage from "./IncorrectMessage.js";
 import Searchbar from "./Searchbar.js";
 import { Redirect } from "react-router-dom";
-import "./style.css";
 
 class HomeBody extends Component {
   constructor() {
@@ -22,6 +21,7 @@ class HomeBody extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.searchCountry = this.searchCountry.bind(this);
     this.submitChange = this.submitChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +47,10 @@ class HomeBody extends Component {
     if (event.key === "Enter") {
       this.searchCountry(this.state.countryName);
     }
+  }
+
+  handleClick(event) {
+    this.searchCountry(this.state.countryName);
   }
 
   static toValidCountry(countryEntered) {
@@ -121,16 +125,31 @@ class HomeBody extends Component {
   }
 
   render() {
+    const errorStyle = {
+      display: "inline-block",
+      bottom: "10px",
+      marginTop: "1.3vh",
+      marginBottom: "1.8vh",
+    };
+    const searchStyle = {
+      marginBottom: "1.5vh",
+    };
     return (
       <div>
-        <Searchbar
-          placeholderText="Search by country"
-          submitChange={this.submitChange}
-          handleChange={this.handleChange}
-          countryName={this.state.countryName}
-        />
-
-        {this.state.wrongCountry && <IncorrectMessage />}
+        <div style={searchStyle}>
+          <Searchbar
+            placeholderText="Search by country"
+            submitChange={this.submitChange}
+            handleChange={this.handleChange}
+            handleClick={this.handleClick}
+            countryName={this.state.countryName}
+          />
+          {this.state.wrongCountry && (
+            <div style={errorStyle}>
+              <IncorrectMessage />
+            </div>
+          )}
+        </div>
 
         <CountryCard
           isLoading={this.state.isLoading}
@@ -144,7 +163,7 @@ class HomeBody extends Component {
             to={{
               pathname: `/${this.state.countryName}`,
               state: {
-                countryName: this.state.countryName,
+                countryName: "",
                 displayCountry: false,
                 wrongCountry: false,
                 allCountryData: this.state.allCountryData,

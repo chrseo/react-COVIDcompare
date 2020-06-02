@@ -4,6 +4,7 @@ import IncorrectMessage from "./IncorrectMessage.js";
 import Searchbar from "./Searchbar.js";
 import { Redirect } from "react-router-dom";
 import HomeBody from "./HomeBody.js";
+import "./InfoPage.css";
 
 class InfoPage extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class InfoPage extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.searchCountry = this.searchCountry.bind(this);
     this.submitChange = this.submitChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -29,6 +31,10 @@ class InfoPage extends Component {
     if (event.key === "Enter") {
       this.searchCountry(this.state.countryName);
     }
+  }
+
+  handleClick(event) {
+    this.searchCountry(this.state.countryName);
   }
 
   searchCountry(countryEntered) {
@@ -50,18 +56,17 @@ class InfoPage extends Component {
     this.setState({
       wrongCountry: true,
     });
+    //ability to rerender error message
+    setTimeout(() => {
+      this.setState({
+        wrongCountry: false,
+      });
+    }, 1300);
   }
 
   render() {
     return (
       <div>
-        <Searchbar
-          placeholderText="Search another country"
-          submitChange={this.submitChange}
-          handleChange={this.handleChange}
-          countryName={this.state.countryName}
-        />
-
         {this.state.displayCountry && (
           <Redirect
             to={{
@@ -79,22 +84,39 @@ class InfoPage extends Component {
           />
         )}
 
-        {this.state.wrongCountry && <IncorrectMessage />}
-
-        <div>
-          <CountryCard
-            country="World"
-            countryFlags={this.state.countryFlags}
-            countryData={this.state.worldData}
-          />
+        <div className="rightSide">
+          <div className="infoPageSearch">
+            <Searchbar
+              placeholderText="Search another country"
+              submitChange={this.submitChange}
+              handleChange={this.handleChange}
+              handleClick={this.handleClick}
+              countryName={this.state.countryName}
+            />
+            {this.state.wrongCountry && (
+              <div className="errorMessage">
+                <IncorrectMessage />
+              </div>
+            )}
+          </div>
         </div>
 
-        <div>
-          <CountryCard
-            country={this.state.countryData.country}
-            countryFlags={this.state.countryFlags}
-            countryData={this.state.countryData}
-          />
+        <div className="leftSide">
+          <div className="topCard">
+            <CountryCard
+              country="World"
+              countryFlags={this.state.countryFlags}
+              countryData={this.state.worldData}
+            />
+          </div>
+
+          <div className="bottomCard">
+            <CountryCard
+              country={this.state.countryData.country}
+              countryFlags={this.state.countryFlags}
+              countryData={this.state.countryData}
+            />
+          </div>
         </div>
       </div>
     );

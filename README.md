@@ -7,7 +7,7 @@ Compare your country's COVID-19 stats against the world!
 Live stats by country
 https://coronavirus-19-api.herokuapp.com/countries
 
-## Some concepts (app still in progress)
+## Some concepts
 
 ![](images/home.png)
 ![](images/info.png)

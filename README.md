@@ -9,5 +9,5 @@ https://coronavirus-19-api.herokuapp.com/countries
 
 ## Some concepts
 
-![](images/home.png)
+![](images/demo.gif)
 ![](images/info.png)
